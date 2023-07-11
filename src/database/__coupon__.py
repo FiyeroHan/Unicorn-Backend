@@ -5,7 +5,7 @@ from .__conn__ import *
 
 class CouponTable(Base): # 쿠폰 테이블
     __tablename__ = 'coupon' #테이블 이름
-    restaurant_name = Column(String(50), nullable=False) # 식당 이름
+    restaurant_name = Column(String(50), primary_key=True,nullable=False) # 식당 이름
     user_id = Column(String(50), primary_key=True, nullable=False) # 유저 아이디
     coupon_num = Column(Integer(10), nullable=False,) # 쿠폰도장 개수
 
