@@ -1,18 +1,20 @@
 from pydantic import BaseModel
-from sqlalchemy import Column, String, inspect, Integer
+from sqlalchemy import Column, String, inspect, Integer, ForeignKey
 
 from .__conn__ import *
+from .__shop__ import *
+from .__user__ import *
 
 class CouponTable(Base): # 쿠폰 테이블
     __tablename__ = 'coupon' #테이블 이름
-    restaurant_name = Column(String(50), primary_key=True,nullable=False) # 식당 이름
-    user_id = Column(String(50), primary_key=True, nullable=False) # 유저 아이디
+    shop_id = Column(String(50), ForeignKey("shop.id"), primary_key=True, nullable=False) # 식당 아이디
+    user_id = Column(String(50), ForeignKey("user.id"), primary_key=True, nullable=False) # 유저 아이디
     coupon_num = Column(Integer(10), nullable=False,) # 쿠폰도장 개수
 
 class Coupon(BaseModel): # 쿠폰
     restaurant_name: str
-    user_id: int
-    coupon_num: str
+    user_id: str
+    coupon_num: int
 
 
 # CouponTable 테이블 생성
